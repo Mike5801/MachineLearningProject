@@ -31,7 +31,7 @@ El dataset contiene 11 clases. Para cada clase se crearán carpetas de train, va
   - test dataset: 20%
 - En este caso el 80% del total de imágenes será utilizado para entrenar al modelo (60% para entrenarlo y 20% para validar su funcionamiento y realizar los ajustes necesarios al modelo con base en los resultados). 
 - El restante 20% de las imágenes será utilizado para probar el modelo.
-- La selección de las imágenes para cada separación se (train, validation y test) hará de manera aleatoria
+- La selección de las imágenes para cada separación (train, validation y test) se hará de manera aleatoria
   - Si se seleccionan las imágenes de manera secuencial, es posible causar un sesgo al modelo al momento de entrenarlo. 
     - Las imágenes que están al final o en medio pueden ser diferentes a las del inicio. Por lo que, sería recomendable escoger qué imágenes van para cada partición de manera aleatoria
   - Para esto se utilizará un script de python que separará el dataset.
@@ -75,7 +75,7 @@ Carpeta de Google Drive con algunas imágenes generadas (se generó un batch de 
     - Después de probar con la configuración con diferentes valores, se llegó a la conclusión de que un valor de 10 no genera los problemas mencionados.
 ### Justificación de omisión de parámetros en la configuración:
   - Volteado vertical: debido a que ocasiona el mismo efecto que la rotación de 180°, no se consideró esta configuración
-  - "width shift", "height shift": debido a los pixeles perdidos que puede ocasionar la imagen generada no se incluyó este parámetro
+  - "Width shift" y "Height shift": debido a los pixeles perdidos que puede ocasionar la imagen generada no se incluyó este parámetro
   - Brillo: para las imágenes que sean de noche o paisajes blancos, practicamente generaría un fondo negro o blanco, por lo que se consideró como una fuente de ruido
   - Channel shift: cambiar los valores del canal de la imagen puede ocasionar cambios en los colores. Esto no es óptimo, ya que puede perder las características visuales del a imagen original
 
