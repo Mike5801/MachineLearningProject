@@ -85,6 +85,7 @@ Carpeta de Google Drive con algunas imágenes generadas (se generó un batch de 
 - Funciones de activiación no lineales: Una función de activación es un nodo que está después de una capa convolucional. Esto se utiliza para hacer una transformación no lineal sobre la señal de entrada. ReLU (Rectified Linear Unit) es una función que regresará la entrada si es positiva, de lo contrario regresará cero.
 - Capa de agrupación (Pooling): una desventaja de la salida de la capa convolucional es que registra la posición exacta de los features de la entrada. Esto significa que durante cualquier modificación de la matriz como recortes, rotaciones, entre otros, resultará en un mapa de features diferente. Para contrarrestar este problema, se realiza un "down sampling" de la capa convolucional. Esto se logra aplicando una capa de agrupación (pooling). De esta manera, es posible representar los mismos features ante modificaciones pequeñas evitando que la salida cambie. 
   - Tipos de pooling
+
 ![Tipos de pooling](https://github.com/Mike5801/MachineLearningProject/blob/main/images/TypesPooling.png?raw=true)
 - Capa completamente conectada (Fully connected layer): Al final de la red neuronal convolucional, la salida de la última capa de agrupación actúa como una entrada a la capa completamente conectada (Fully Connected Layer). Puede haber más de una de estas capas en la arquitectura. "Completamente conectada" hace referencia a que todos los nodos de la capa uno están conectados con todos los nodos de la segunda capa.
 
