@@ -119,6 +119,8 @@ Imagen de la arquitectura propuesta:
 
 ![Imagen arquitectura](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Optimized%20Architecture%20CNN.png?raw=true)
 
+En la configuración de la CNN para el entrenamiento se utilizó el optimizador Adam con un aprendizaje fijo (fixed-learning) de 0.001 y un batch size de 32 ejemplos. Para la métrica de loss, utilizó el binary cross-entropy (BCE) también llamado log loss. Por último el dropout rate se estableció a 0.2 para evitar el overfitting de la red.
+
 
 ##### Resultados
 Comparación de la métrica accuracy con otros métodos que se han aplicado al mismo dataset
