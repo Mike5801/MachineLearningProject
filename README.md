@@ -81,11 +81,16 @@ Carpeta de Google Drive con algunas imágenes generadas (se generó un batch de 
 
 ## Estado del arte del modelo
 #### Conceptos
-- Capa convolucional (Convolutional layer)
-- Funciones de activiación no lineales
-- Capa de agrupación (Pooling)
-- Capa completamente conectada (Fully connected layer)
-- Max Pooling
+- Capa convolucional (Convolutional layer): es una matriz llamada kernel que es pasada sobre la matriz de entrada para crear el mapa de features de la siguiente capa. Se ejecuta una operación llamada convolución al deslizar el kernel sobre la matriz de entrada. Para sección de la matriz de entrada se calcula la multiplicación de matrices con el Kernel mientras se desliza.
+- Funciones de activiación no lineales: Una función de activación es un nodo que está después de una capa convolucional. Esto se utiliza para hacer una transformación no lineal sobre la señal de entrada. ReLU (Rectified Linear Unit) es una función que regresará la entrada si es positiva, de lo contrario regresará cero.
+- Capa de agrupación (Pooling): una desventaja de la salida de la capa convolucional es que registra la posición exacta de los features de la entrada. Esto significa que durante cualquier modificación de la matriz como recortes, rotaciones, entre otros, resultará en un mapa de features diferente. Para contrarrestar este problema, se realiza un "down sampling" de la capa convolucional. Esto se logra aplicando una capa de agrupación (pooling). De esta manera, es posible representar los mismos features ante modificaciones pequeñas evitando que la salida cambie. 
+  - Tipos de pooling
+    - ![Tipos de pooling]()
+- Capa completamente conectada (Fully connected layer): Al final de la red neuronal convolucional, la salida de la última capa de agrupación actúa como una entrada a la capa completamente conectada (Fully Connected Layer). Puede haber más de una de estas capas en la arquitectura. "Completamente conectada" hace referencia a que todos los nodos de la capa uno están conectados con todos los nodos de la segunda capa.
+
+Las definiciones se obtuvieron del marco teórico del artículo 2 en su sección de marco teórico
+
+<a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">Link del artículo 2</a>
 
 #### Artículo 1: "An Optimized Architecture of Image Classification Using Convolutional Neural Network"
 
@@ -148,7 +153,7 @@ La arquitectura propuesta en este artículo obtuvo el mejor porcentaje de accura
 
 Aamir M. et al, "An Optimized Architecture of Image Classification Using Convolutional Neural Network", Modern Education and Computer Science PRESS, 2019
 
-<a href="https://www.mecs-press.org/ijigsp/ijigsp-v11-n10/IJIGSP-V11-N10-5.pdf">Link del artículo</a>
+<a href="https://www.mecs-press.org/ijigsp/ijigsp-v11-n10/IJIGSP-V11-N10-5.pdf">Link del artículo 1</a>
 
 #### Artículo 2: "Transfer learning using VGG-16 with Deep Convolutional Neural Network for Classifying Images"
 
@@ -237,4 +242,4 @@ El primer modelo construido genera un accuracy de 72.40% para el set de test. De
 
 Tammina S., "Transfer learning using VGG-16 with Deep Convolutional Nerual Network for Classifying Images", International Journal of Scientific and Research Publications, Vol. 9, Issue 10, 2019
 
-<a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">Link del artículo</a>
+<a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">Link del artículo 2</a>
