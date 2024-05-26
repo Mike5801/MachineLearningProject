@@ -85,6 +85,7 @@ Carpeta de Google Drive con algunas imágenes generadas (se generó un batch de 
 - Funciones de activiación no lineales
 - Capa de agrupación (Pooling)
 - Capa completamente conectada (Fully connected layer)
+- Max Pooling
 
 #### Artículo 1: "An Optimized Architecture of Image Classification Using Convolutional Neural Network"
 
@@ -97,12 +98,12 @@ CIFAR-10 está etiquetado con 10 clases: aviones, automóviles, pájaros, gatos,
 
 ##### Arquitectura del modelo
 La arquitectura propuesta para optimizar la clasificación de imágenes es:
-- Capa convolucional de entrada: 32 feature maps con un tamaño de 3 x 3, relu como función de activación  y el límite de los pesos (max norm) establecido and a 3
+- Capa convolucional de entrada: 32 feature maps con un tamaño de 3 x 3, ReLU como función de activación  y el límite de los pesos (max norm) establecido and a 3
 - Capa de agrupación (Max Pool layer) con un tamaño de 2 x 2
-- Capa convolucional de entrada: 64 feature maps con un tamaño de 3 x 3, relu como función de activación  y el límite de los pesos (max norm) establecido and a 3
+- Capa convolucional de entrada: 64 feature maps con un tamaño de 3 x 3, ReLU como función de activación  y el límite de los pesos (max norm) establecido and a 3
 - Capa de agrupación (Max Pool) con un tamaño 2 x 2
 - Dropout establecido a 20%
-- Capa convolucional de entrada: 64 feature maps con un tamaño de 3 x 3, relu como función de activación  y el límite de los pesos (max norm) establecido and a 3
+- Capa convolucional de entrada: 64 feature maps con un tamaño de 3 x 3, ReLU como función de activación  y el límite de los pesos (max norm) establecido and a 3
 - Capa de agrupación (Max Pool) con un tamaño 2 x 2
 - Flatten layer
 - Capa completamente conectada (fully connected layer) con 512 unidades y rectificador como función de activación
@@ -146,5 +147,71 @@ Aamir M. et al, "An Optimized Architecture of Image Classification Using Convolu
 
 <a href="https://www.mecs-press.org/ijigsp/ijigsp-v11-n10/IJIGSP-V11-N10-5.pdf">Link del artículo</a>
 
+#### Artículo 2: "Transfer learning using VGG-16 with Deep Convolutional Neural Network for Classifying Images"
 
+Transfer learning es un método de re-utilizar un modelo pre-entrenado con conocimiento para otra tarea. Transfer learning puede ser usado para la clasificación, regresión y problemas de agrupación. Para este caso en partícular, el  artículo utilizara el modelo pre-entrenado de VGG-16 para clasificar imágenes.
 
+##### Metodología
+En este artículo, primero implementan una CNN básica para clasificar las imágenes. Posteriormente ajustaran el modelo con imágenes aumentadas. Por último, utilizarán el modelo pre-entrenado VGG-16 para clasificar las imágenes.
+
+Para cada uno de estas fases, se calcula el accuracy y el loss del modelo para observar cómo va mejorando dependiendo de los ajustes y adiciones al modelo.
+
+##### Descripción del dataset
+El conjunto original contiene 25,000 imágenes de perros y gatos. Como el objetivo de este artículo es construir un modelo de clasificación de imágenes robusto con restricciones, decidieron cortar el dataset. Para entrenar al modelo y probarlo, tomaron 7,000 imágenes del dataset total: 5,000 para la separación de train y 2,000 para la separación de test.
+
+### Arquitectura del modelo
+
+I. CNN Básica
+- Tres capas convolucionales con un tamaño de 3 x 3 y ReLU como función de activación
+- Una capa de agrupación (Max Pool) de tamaño 2 x 2.
+- Capa completamente conectada (fully connected layer) con 2 unidades para determinar si es perro o gato
+
+II. Imágenes aumentadas
+- Utilizando Keras y la función ImageDataGenerator() con las siguientes características:
+  - Zoom aleatorio con un factor de 0.3
+  - Rotación aleatoria de 50°
+  - Movimiento de la image horizontal y verticalmente por un factor de 0.2
+  - Estiramiento por un factor de 0.2
+  - Re-escalado de los pixeles a un intervalo normalizado de 0 y 1
+
+```
+train_datagen = ImageDataGenerator(
+  rescale = 1. / 255,
+  zoom_range = 0.4,
+  rotation_range = 50,
+  width_shift_rage = 0.3,
+  height_shift_rage = 0.3,
+  shear_range = 0.2,
+  horizontal_flip = True,
+  fill_mode = "nearest")
+)
+```
+
+III. Usando un modelo pre-entrenado para extraer los features de las imágenes aumentadas
+- En esta fase importan el modelo pre-entrenado de VGG-16 el cual está entrenado con los pesos de ImageNet
+  - ImageNet es un projecto de investigación para desarrollar una base de datos de imágenes con sus anotaciones (imagen y etiqueta). VGG-16 ya ha aprendido features de bajo nivel como espacio, esquinas, rotaciones, brillo, formas. Este conocimiento puede ser transferido para  extraer features para un problema diferente
+  - Al importar el modelo pre-entrenado mantienen las siguientes configuraciones
+    - include_top = False evita importar la última capa del modelo pre-entrenado que se encarga de la clasificación, ya que se busca clasificar las imágenes del dataset del artículo y no usar las clasificaciones del modelo pre-entrenado
+  - Después de extrear los features con el modelo pre-entrenado, se utiliza la capa completamente conectada del modelo básico (fully connected layer) para clasificar las imágenes en dos categorías: perro o gato.
+```
+from keras.applications import vgg16
+from keras.models import Model
+import keras
+vgg = vgg16.VGG16(include_top=False, weights='imagenet', input_shape=(150,150,3))
+```
+
+##### Resultados
+
+| Fase de metodología | Training accuracy | Test accuracy |
+| - | - | - |
+| CNN Básico | 98.20% | 72.40% |
+| CNN con imágenes aumentadas | 81.30% | 89.20% |
+| CNN con modelo VGG-16 e imágenes aumentadas | 86.50% | 95.40% |
+
+El primer modelo construido genera un accuracy de 72.40% para el set de test. Después de ajustar el modelo con imágenes aumentadas, el accuracy incrementa a 79.20%. Por último, al añadir el modelo pre-entrenado, el accuracy incrementa a 95.40%
+
+##### Referencia del artículo
+
+Tammina S., "Transfer learning using VGG-16 with Deep Convolutional Nerual Network for Classifying Images", International Journal of Scientific and Research Publications, Vol. 9, Issue 10, 2019
+
+<a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">Link del artículo</a>
