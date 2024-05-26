@@ -110,7 +110,10 @@ La arquitectura propuesta para optimizar la clasificación de imágenes es:
 - Dropout establecido a 50%
 - Capa de salida completamente conectada (fully connected layer) con 10 unidades y SoftMax como función de activación
 
-Imagen de la arquitectura propuesta: COLOCAR IMAGEN
+Imagen de la arquitectura propuesta:
+
+![Imagen arquitectura](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Optimized%20Architecture%20CNN.png?raw=true)
+
 
 ##### Resultados
 Comparación de la métrica accuracy con otros métodos que se han aplicado al mismo dataset
@@ -201,6 +204,26 @@ vgg = vgg16.VGG16(include_top=False, weights='imagenet', input_shape=(150,150,3)
 ```
 
 ##### Resultados
+
+Con el primer modelo se obtuvieron las siguientes métricas de loss y accuracy.
+
+![Accuracy y Loss de CNN Básico](https://github.com/Mike5801/MachineLearningProject/blob/main/images/BasicCNN_acc&loss.png?raw=true)
+
+Como se observa en la gráfica, después de los primeros 3 epochs el modelo con ya no era capaz de clasificar las imágenes de la separación de test a comparación de la separación de train, indicando un comportamiento de overfitting.
+
+Con el segundo modelo utilizando imágenes aumentadas para entrenar al modelo se obtuvieron los siguientes resultados.
+
+![Accuracy después de imágenes aumentadas](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Img_Augm_acc.png?raw=true)
+
+![Loss después de imágenes aumentadas](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Img_Augm_loss.png?raw=true)
+
+La idea principal de usar estas imágenes aumentadas es agregar pequeñas variaciones de las imágenes sin dañar el objeto central para que la red sea más robusta cuando se enfrente al mundo real con situaciones similares. Como se observa en la gráfica, ambas métricas para ambas separaciones son muy similares
+
+Por último, al utilizar el modelo pre-entrenado VGG-16 se obtuvieron los siguientes resultados.
+
+![Accuracy y Loss con VGG-16](https://github.com/Mike5801/MachineLearningProject/blob/main/images/TransferLearning_acc&loss.png?raw=true)
+
+##### Resumen de los resultados
 
 | Fase de metodología | Training accuracy | Test accuracy |
 | - | - | - |
