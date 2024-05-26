@@ -162,7 +162,7 @@ Para cada uno de estas fases, se calcula el accuracy y el loss del modelo para o
 ##### Descripción del dataset
 El conjunto original contiene 25,000 imágenes de perros y gatos. Como el objetivo de este artículo es construir un modelo de clasificación de imágenes robusto con restricciones, decidieron cortar el dataset. Para entrenar al modelo y probarlo, tomaron 7,000 imágenes del dataset total: 5,000 para la separación de train y 2,000 para la separación de test.
 
-### Arquitectura del modelo
+#####  Arquitectura del modelo
 
 I. CNN Básica
 - Tres capas convolucionales con un tamaño de 3 x 3 y ReLU como función de activación
