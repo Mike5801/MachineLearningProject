@@ -337,9 +337,11 @@ Con base en la metodolgía del artículo 2, se designaron los siguientes epochs 
 #### Fase 1
 Los resultados de las métricas de accuracy y loss con el modelo entrenado sin las imágenes aumentadas fueron:
 
-![Modelo_fase1_acc&loss]()
+![Modelo_fase1_acc&loss](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_1_acc&loss.png?raw=true)
 
 El modelo memorizó los patrones de la separación de train, ocasionando que al evaluar el modelo con la separación de validation no obtenga clasificaciones correctas. Por ello se concluye que para esta fase el modelo tiene overfitting. Esto se observa en las gráficas cuando los valores de train son mejores que los valores de validation.
+
+Este comportamiento era esperado, de acuerdo con los resultados y la metodología descrita en el artículo 2 de la sección del estado del arte
 
 Para hacer más robusto el modelo, en la fase 2 se entrena al modelo con las imágenes aumentadas. De esta manera, el modelo es forzado a ver modificaciones de las imágenes originales, haciendo que sea más difícil memorizar las imágenes de entrada.
 
