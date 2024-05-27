@@ -346,4 +346,39 @@ Este comportamiento era esperado, de acuerdo con los resultados y la metodologí
 Para hacer más robusto el modelo, en la fase 2 se entrena al modelo con las imágenes aumentadas. De esta manera, el modelo es forzado a ver modificaciones de las imágenes originales, haciendo que sea más difícil memorizar las imágenes de entrada.
 
 #### Fase 2
+Los resultados de las métricas de accuracy y loss con el modelo entrenado con las imágenes aumentadas fueron:
+
+![Modelo_fase2_acc&loss]()
+
+La diferencia entre las métricas de loss y accuracy ya no es tan grande entre la separación de los datos de train y validation. Esto quiere decir que el modelo sí logró aprender algunos patrones que le permiten clasificar a la imagen. Sin embargo, aún existe una diferencia mayor al 6% de las métricas, por lo que aún se puede considerar que se encuentra en overfitting.
+
+Al ser el modelo final de la fase 2 de la metodología, se decidió utilizar éste para probarlo contra la separación de los datos de test. Los resultados fueron los siguientes.
+
+| Accuracy | Loss |
+|-|-|
+| 0.753 | 0.13 |
+
+Como se puede observar, ambas métricas están muy cercanas a los valores obtenidos en la etapa de entrenamiento del modelo. Esto quiere decir que el modelo sí fue capaz de aprender algunos patrones en lugar de solo memorizar las imágenes.
+
+Para saber qué tan bien aprendió patrones para reconocer y clasificar imágenes nuevas, también se obtuvo la matriz de confusión y las métricas precision, recall y f1-score
+- Es importante mencionar que para obtener estas métricas solo se hizo sobre el batch de 32 imágenes generadas con la separación de test
+
+![Modelo_fase2_matriz_confusion]()
+
+| class | precision | recall | f1-score |
+|-|-|-|-|
+| dew | 1.00 | 0.60 | 0.75
+| fogsmog | 1.00 | 0.67 | 0.80
+| frost | 0.00 | 0.00 | 0.00
+| glaze | 0.50 | 0.75 | 0.60
+| hail | 1.00 | 0.67 | 0.80
+| lightning | 0.50 | 1.00 | 0.67
+| rain | 0.62 | 1.00 | 0.77
+| rainbow | 1.00 | 1.00 | 1.00
+| rime | 0.75 | 0.75 | 0.75
+| sandstorm | 0.50 | 0.50 | 0.50
+| snow | 0.00 | 0.00 | 0.00
+
+Como se puede observar, el modelo es capaz de detectar con un porcentaje decente si una imagen pertenece a una clase de manera correcta.
+- Aquellos valores que aparecen en 0, puede ser debido a que la obtención de la métrica se realizó sobre un batch de 32 imágenes. Esto podría cambiar si se realiza este cálculo sobre toda la separación de test
 
