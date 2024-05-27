@@ -348,7 +348,7 @@ Para hacer más robusto el modelo, en la fase 2 se entrena al modelo con las im�
 #### Fase 2
 Los resultados de las métricas de accuracy y loss con el modelo entrenado con las imágenes aumentadas fueron:
 
-![Modelo_fase2_acc&loss]()
+![Modelo_fase2_acc&loss](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_2_acc&loss.png?raw=true)
 
 La diferencia entre las métricas de loss y accuracy ya no es tan grande entre la separación de los datos de train y validation. Esto quiere decir que el modelo sí logró aprender algunos patrones que le permiten clasificar a la imagen. Sin embargo, aún existe una diferencia mayor al 6% de las métricas, por lo que aún se puede considerar que se encuentra en overfitting.
 
@@ -363,7 +363,7 @@ Como se puede observar, ambas métricas están muy cercanas a los valores obteni
 Para saber qué tan bien aprendió patrones para reconocer y clasificar imágenes nuevas, también se obtuvo la matriz de confusión y las métricas precision, recall y f1-score
 - Es importante mencionar que para obtener estas métricas solo se hizo sobre el batch de 32 imágenes generadas con la separación de test
 
-![Modelo_fase2_matriz_confusion]()
+![Modelo_fase2_matriz_confusion](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_2_confmat.png?raw=true)
 
 | class | precision | recall | f1-score |
 |-|-|-|-|
