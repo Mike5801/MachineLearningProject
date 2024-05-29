@@ -105,12 +105,12 @@ La arquitectura propuesta para optimizar la clasificación de imágenes es:
 - Capa completamente conectada (fully connected layer) con 512 unidades y rectificador como función de activación
 - Dropout establecido a 50%
 - Capa de salida completamente conectada (fully connected layer) con 10 unidades y SoftMax como función de activación
-<div style="text-align: right">[1]</div>
+<div align="right">[1]</div>
 
 Imagen de la arquitectura propuesta:
 
 ![Imagen arquitectura](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Optimized%20Architecture%20CNN.png?raw=true)
-<div style="text-align: right">[1]</div>
+<div align="right">[1]</div>
 
 
 En la configuración de la CNN para el entrenamiento se utilizó el optimizador Adam con un aprendizaje fijo (fixed-learning) de 0.001 y un batch size de 32 ejemplos. Para la métrica de loss, utilizó el binary cross-entropy (BCE) también llamado log loss. Por último el dropout rate se estableció a 0.2 para evitar el overfitting de la red. [1]
@@ -127,7 +127,7 @@ I. CNN Básica
 - Tres capas convolucionales con un tamaño de 3 x 3 y ReLU como función de activación
 - Una capa de agrupación (Max Pool) de tamaño 2 x 2.
 - Capa completamente conectada (fully connected layer) con 2 unidades para determinar si es perro o gato
-<div style="text-align: right">[2]</div>
+<div align="right">[2]</div>
 
 II. Imágenes aumentadas
 - Utilizando Keras y la función ImageDataGenerator() con las siguientes características:
@@ -136,7 +136,7 @@ II. Imágenes aumentadas
   - Movimiento de la image horizontal y verticalmente por un factor de 0.2
   - Estiramiento por un factor de 0.2
   - Re-escalado de los pixeles a un intervalo normalizado de 0 y 1
-<div style="text-align: right">[2]</div>
+<div align="right">[2]</div>
 
 III. Usando un modelo pre-entrenado para extraer los features de las imágenes aumentadas
 - En esta fase importan el modelo pre-entrenado de VGG-16 el cual está entrenado con los pesos de ImageNet
@@ -144,7 +144,7 @@ III. Usando un modelo pre-entrenado para extraer los features de las imágenes a
   - Al importar el modelo pre-entrenado mantienen las siguientes configuraciones
     - include_top = False evita importar la última capa del modelo pre-entrenado que se encarga de la clasificación, ya que se busca clasificar las imágenes del dataset del artículo y no usar las clasificaciones del modelo pre-entrenado
   - Después de extrear los features con el modelo pre-entrenado, se utiliza la capa completamente conectada del modelo básico (fully connected layer) para clasificar las imágenes en dos categorías: perro o gato.
-<div style="text-align: right">[2]</div>
+<div align="right">[2]</div>
 
 Con el primer modelo, después de los primeros 3 epochs el modelo con ya no era capaz de clasificar las imágenes de la separación de test a comparación de la separación de train, indicando un comportamiento de overfitting. [2]
 
@@ -179,7 +179,7 @@ Algunas modificaciones que se hicieron a este modelo fueron:
 ### Metodología de entrenamiento del modelo
 Para entrenar el modelo, se va a utilizar una metodología muy similar al descrito en el [2] para encontrar las diferencias entre el modelo con la arquitectura optimizada y un modelo que utiliza transfer learning para la extracción de features de las imágenes.
 
-1. Crear un modelo para la clasificación de imágenes siguiendo [1]
+1. Crear un modelo para la clasificación de imágenes siguiendo la arquitectura propuesta en [1]
 2. Entrenar el modelo con las imágenes no aumentadas 
 3. Evaluar el modelo con la separación de datos de validación y test
 4. Entrenar el modelo con las imágenes aumentadas
