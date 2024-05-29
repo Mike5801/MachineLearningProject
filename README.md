@@ -1,5 +1,5 @@
 # A01610836 TC3002B Proyecto M2 
-Acceso de lectura al espacio de trabajo del proyecto: <a href="https://colab.research.google.com/drive/1LQanzyHwA0hZgATzanzLaqG0XwBa9Tf8?usp=sharing">Google Collab</a>
+El espacio de trabajo se encuentra en el archivo "A01610836_Project.ipynb" de este repositorio 
 
 ## Información del dataset
 El dataset seleccionado se obtuvo en Kaggle: <a href="https://www.kaggle.com/datasets/jehanbhathena/weather-dataset">Kaggle Dataset</a>
@@ -81,28 +81,18 @@ Carpeta de Google Drive con algunas imágenes generadas (se generó un batch de 
 
 ## Estado del arte del modelo
 ### Conceptos
-- Capa convolucional (Convolutional layer): es una matriz llamada kernel que es pasada sobre la matriz de entrada para crear el mapa de features de la siguiente capa. Se ejecuta una operación llamada convolución al deslizar el kernel sobre la matriz de entrada. Para sección de la matriz de entrada se calcula la multiplicación de matrices con el Kernel mientras se desliza.
-- Funciones de activiación no lineales: Una función de activación es un nodo que está después de una capa convolucional. Esto se utiliza para hacer una transformación no lineal sobre la señal de entrada. ReLU (Rectified Linear Unit) es una función que regresará la entrada si es positiva, de lo contrario regresará cero.
-- Capa de agrupación (Pooling): una desventaja de la salida de la capa convolucional es que registra la posición exacta de los features de la entrada. Esto significa que durante cualquier modificación de la matriz como recortes, rotaciones, entre otros, resultará en un mapa de features diferente. Para contrarrestar este problema, se realiza un "down sampling" de la capa convolucional. Esto se logra aplicando una capa de agrupación (pooling). De esta manera, es posible representar los mismos features ante modificaciones pequeñas evitando que la salida cambie. 
-  - Tipos de pooling
+- Capa convolucional (Convolutional layer): es una matriz llamada kernel que es pasada sobre la matriz de entrada para crear el mapa de features de la siguiente capa. Se ejecuta una operación llamada convolución al deslizar el kernel sobre la matriz de entrada. Para sección de la matriz de entrada se calcula la multiplicación de matrices con el Kernel mientras se desliza. [2]
+- Funciones de activiación no lineales: Una función de activación es un nodo que está después de una capa convolucional. Esto se utiliza para hacer una transformación no lineal sobre la señal de entrada. ReLU (Rectified Linear Unit) es una función que regresará la entrada si es positiva, de lo contrario regresará cero. [2]
+- Capa de agrupación (Pooling): una desventaja de la salida de la capa convolucional es que registra la posición exacta de los features de la entrada. Esto significa que durante cualquier modificación de la matriz como recortes, rotaciones, entre otros, resultará en un mapa de features diferente. Para contrarrestar este problema, se realiza un "down sampling" de la capa convolucional. Esto se logra aplicando una capa de agrupación (pooling). De esta manera, es posible representar los mismos features ante modificaciones pequeñas evitando que la salida cambie. [2]
+  - Tipos de pooling [2]
 
 ![Tipos de pooling](https://github.com/Mike5801/MachineLearningProject/blob/main/images/TypesPooling.png?raw=true)
-- Capa completamente conectada (Fully connected layer): Al final de la red neuronal convolucional, la salida de la última capa de agrupación actúa como una entrada a la capa completamente conectada (Fully Connected Layer). Puede haber más de una de estas capas en la arquitectura. "Completamente conectada" hace referencia a que todos los nodos de la capa uno están conectados con todos los nodos de la segunda capa.
+- Capa completamente conectada (Fully connected layer): Al final de la red neuronal convolucional, la salida de la última capa de agrupación actúa como una entrada a la capa completamente conectada (Fully Connected Layer). Puede haber más de una de estas capas en la arquitectura. "Completamente conectada" hace referencia a que todos los nodos de la capa uno están conectados con todos los nodos de la segunda capa. [2]
 
-Las definiciones se obtuvieron del marco teórico del artículo 2 en su sección de marco teórico
+### Marco teoríco
 
-<a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">Link del artículo 2</a>
+Para encontrar una arquitectura optimizada es necesarop explorar los diferentes factores como número de capas y profundidad, número de features, el tamaño del batch, entre otros, para determinar su impacto en el desempeño de la red. [1]
 
-### Artículo 1: "An Optimized Architecture of Image Classification Using Convolutional Neural Network"
-
-Este artículo explora diferentes factores como número de capas y profundidad, número de features, el tamaño del batch, entre otros, para determinar su impacto en el desempeño de la red. Esto con el objetivo de encontrar una arquitectura para la clasificación de imágenes optimizada.
-
-#### Descripción del dataset
-Para este experimento, el artículo usó el dataset de CIFAR-10. Éste contiene 60,000 imágenes de color con una separación de training de 50,000 imágenes y una separación de test de 10,000 imágenes. Cada imagen tiene un tamaño de 32 x 32 pixeles.
-
-CIFAR-10 está etiquetado con 10 clases: aviones, automóviles, pájaros, gatos, venados, perros, ranas, caballos, barcos y camiones.
-
-#### Arquitectura del modelo
 La arquitectura propuesta para optimizar la clasificación de imágenes es:
 - Capa convolucional de entrada: 32 feature maps con un tamaño de 3 x 3, ReLU como función de activación  y el límite de los pesos (max norm) establecido and a 3
 - Capa de agrupación (Max Pool layer) con un tamaño de 2 x 2
@@ -115,67 +105,29 @@ La arquitectura propuesta para optimizar la clasificación de imágenes es:
 - Capa completamente conectada (fully connected layer) con 512 unidades y rectificador como función de activación
 - Dropout establecido a 50%
 - Capa de salida completamente conectada (fully connected layer) con 10 unidades y SoftMax como función de activación
+<div style="text-align: right">[1]</div>
 
 Imagen de la arquitectura propuesta:
 
 ![Imagen arquitectura](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Optimized%20Architecture%20CNN.png?raw=true)
+<div style="text-align: right">[1]</div>
 
-En la configuración de la CNN para el entrenamiento se utilizó el optimizador Adam con un aprendizaje fijo (fixed-learning) de 0.001 y un batch size de 32 ejemplos. Para la métrica de loss, utilizó el binary cross-entropy (BCE) también llamado log loss. Por último el dropout rate se estableció a 0.2 para evitar el overfitting de la red.
 
+En la configuración de la CNN para el entrenamiento se utilizó el optimizador Adam con un aprendizaje fijo (fixed-learning) de 0.001 y un batch size de 32 ejemplos. Para la métrica de loss, utilizó el binary cross-entropy (BCE) también llamado log loss. Por último el dropout rate se estableció a 0.2 para evitar el overfitting de la red. [1]
 
-#### Resultados
-Comparación de la métrica accuracy con otros métodos que se han aplicado al mismo dataset
+La arquitectura propuesta en [1] obtuvo el mejor porcentaje de accuracy comparado a los otros métodos. Del mismo modo, dicha arquitectura obtuvo un buen desempeño en las métricas de calidad (precision, recall, f1-score) para la gran mayoría de las clases.
 
-| Método | Accuracy % |
-|--------|------------|
-| Logistic Regression (Softmax) | 40.76 |
-| KNN classifier | 22.84, 38.6 |
-| Patternet | 41.325 |
-| SVM | 55.22, 33.54 |
-| Fast-learning shallow CNN | 75.86 |
-| Arquitectura propuesta | 78.86 |
+Transfer learning es un método de re-utilizar un modelo pre-entrenado con conocimiento para otra tarea. Transfer learning puede ser usado para la clasificación, regresión y problemas de agrupación. Para este caso en partícular, el  artículo utilizara el modelo pre-entrenado de VGG-16 para clasificar imágenes. [2]
 
-Rendimiento de la arquitectura propuesta sobre las 10 clases del dataset CIFAR-10
+Para encontrar las diferencias entre diferentes modelos la metodología de [2] propone lo siguiente: primero implementan una CNN básica para clasificar las imágenes. Posteriormente ajustaran el modelo con imágenes aumentadas. Por último, utilizarán el modelo pre-entrenado VGG-16 para clasificar las imágenes.
 
-| Name | Precision (Correctness) | Recall (Completeness) | f1-score |
-|-|-|-|-|
-| Avión | 82.00 | 82.5 | 82.2 |
-| Automóvil | 87.83 | 88.8 | 88.3 |
-| Pájaro | 79.43 | 61.4 | 69.2 |
-| Gato | 62.53 | 61.1 | 61.8 |
-| Venado | 67.61 | 80.8 | 73.6 |
-| Perro | 71.33 | 68.2 | 69.7 |
-| Rana | 82.42 | 84.9 | 83.6 |
-| Caballo | 81.72 | 81.4 | 81.5 |
-| Barco | 87.48 | 88.1 | 87.7 |
-| Camión | 81.69 | 85.7 | 83.6 |
-
-La arquitectura propuesta en este artículo obtuvo el mejor porcentaje de accuracy comparado a los otros métodos. Del mismo modo, dicha arquitectura obtuvo un buen desempeño en las métricas de calidad (precision, recall, f1-score) para la gran mayoría de las clases.
-
-#### Referencia del artículo
-
-Aamir M. et al, "An Optimized Architecture of Image Classification Using Convolutional Neural Network", Modern Education and Computer Science PRESS, 2019
-
-<a href="https://www.mecs-press.org/ijigsp/ijigsp-v11-n10/IJIGSP-V11-N10-5.pdf">Link del artículo 1</a>
-
-### Artículo 2: "Transfer learning using VGG-16 with Deep Convolutional Neural Network for Classifying Images"
-
-Transfer learning es un método de re-utilizar un modelo pre-entrenado con conocimiento para otra tarea. Transfer learning puede ser usado para la clasificación, regresión y problemas de agrupación. Para este caso en partícular, el  artículo utilizara el modelo pre-entrenado de VGG-16 para clasificar imágenes.
-
-#### Metodología
-En este artículo, primero implementan una CNN básica para clasificar las imágenes. Posteriormente ajustaran el modelo con imágenes aumentadas. Por último, utilizarán el modelo pre-entrenado VGG-16 para clasificar las imágenes.
-
-Para cada uno de estas fases, se calcula el accuracy y el loss del modelo para observar cómo va mejorando dependiendo de los ajustes y adiciones al modelo.
-
-#### Descripción del dataset
-El conjunto original contiene 25,000 imágenes de perros y gatos. Como el objetivo de este artículo es construir un modelo de clasificación de imágenes robusto con restricciones, decidieron cortar el dataset. Para entrenar al modelo y probarlo, tomaron 7,000 imágenes del dataset total: 5,000 para la separación de train y 2,000 para la separación de test.
-
-####  Arquitectura del modelo
+Para cada uno de estas fases, calculan el accuracy y el loss del modelo para observar cómo va mejorando dependiendo de los ajustes y adiciones al modelo. [2]
 
 I. CNN Básica
 - Tres capas convolucionales con un tamaño de 3 x 3 y ReLU como función de activación
 - Una capa de agrupación (Max Pool) de tamaño 2 x 2.
 - Capa completamente conectada (fully connected layer) con 2 unidades para determinar si es perro o gato
+<div style="text-align: right">[2]</div>
 
 II. Imágenes aumentadas
 - Utilizando Keras y la función ImageDataGenerator() con las siguientes características:
@@ -184,19 +136,7 @@ II. Imágenes aumentadas
   - Movimiento de la image horizontal y verticalmente por un factor de 0.2
   - Estiramiento por un factor de 0.2
   - Re-escalado de los pixeles a un intervalo normalizado de 0 y 1
-
-```
-train_datagen = ImageDataGenerator(
-  rescale = 1. / 255,
-  zoom_range = 0.4,
-  rotation_range = 50,
-  width_shift_rage = 0.3,
-  height_shift_rage = 0.3,
-  shear_range = 0.2,
-  horizontal_flip = True,
-  fill_mode = "nearest")
-)
-```
+<div style="text-align: right">[2]</div>
 
 III. Usando un modelo pre-entrenado para extraer los features de las imágenes aumentadas
 - En esta fase importan el modelo pre-entrenado de VGG-16 el cual está entrenado con los pesos de ImageNet
@@ -204,125 +144,50 @@ III. Usando un modelo pre-entrenado para extraer los features de las imágenes a
   - Al importar el modelo pre-entrenado mantienen las siguientes configuraciones
     - include_top = False evita importar la última capa del modelo pre-entrenado que se encarga de la clasificación, ya que se busca clasificar las imágenes del dataset del artículo y no usar las clasificaciones del modelo pre-entrenado
   - Después de extrear los features con el modelo pre-entrenado, se utiliza la capa completamente conectada del modelo básico (fully connected layer) para clasificar las imágenes en dos categorías: perro o gato.
-```
-from keras.applications import vgg16
-from keras.models import Model
-import keras
-vgg = vgg16.VGG16(include_top=False, weights='imagenet', input_shape=(150,150,3))
-```
+<div style="text-align: right">[2]</div>
 
-#### Resultados
+Con el primer modelo, después de los primeros 3 epochs el modelo con ya no era capaz de clasificar las imágenes de la separación de test a comparación de la separación de train, indicando un comportamiento de overfitting. [2]
 
-Con el primer modelo se obtuvieron las siguientes métricas de loss y accuracy.
+Con el segundo modelo se utilizaron las imágenes aumentadas. La idea principal de usar estas imágenes aumentadas es agregar pequeñas variaciones de las imágenes sin dañar el objeto central para que la red sea más robusta cuando se enfrente al mundo real con situaciones similares. [2]
 
-![Accuracy y Loss de CNN Básico](https://github.com/Mike5801/MachineLearningProject/blob/main/images/BasicCNN_acc&loss.png?raw=true)
+Por último, al utilizar el modelo pre-entrenado VGG-16 se obtuvieron resultados muy altos en la métrica de accuracy para la separación de test. [2]
 
-Como se observa en la gráfica, después de los primeros 3 epochs el modelo con ya no era capaz de clasificar las imágenes de la separación de test a comparación de la separación de train, indicando un comportamiento de overfitting.
-
-Con el segundo modelo utilizando imágenes aumentadas para entrenar al modelo se obtuvieron los siguientes resultados.
-
-![Accuracy después de imágenes aumentadas](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Img_Augm_acc.png?raw=true)
-
-![Loss después de imágenes aumentadas](https://github.com/Mike5801/MachineLearningProject/blob/main/images/Img_Augm_loss.png?raw=true)
-
-La idea principal de usar estas imágenes aumentadas es agregar pequeñas variaciones de las imágenes sin dañar el objeto central para que la red sea más robusta cuando se enfrente al mundo real con situaciones similares. Como se observa en la gráfica, ambas métricas para ambas separaciones son muy similares
-
-Por último, al utilizar el modelo pre-entrenado VGG-16 se obtuvieron los siguientes resultados.
-
-![Accuracy y Loss con VGG-16](https://github.com/Mike5801/MachineLearningProject/blob/main/images/TransferLearning_acc&loss.png?raw=true)
-
-#### Resumen de los resultados
-
+Los resultados finales de cada modelo fueron: [2]
 | Fase de metodología | Training accuracy | Test accuracy |
 | - | - | - |
 | CNN Básico | 98.20% | 72.40% |
 | CNN con imágenes aumentadas | 81.30% | 89.20% |
 | CNN con modelo VGG-16 e imágenes aumentadas | 86.50% | 95.40% |
 
-El primer modelo construido genera un accuracy de 72.40% para el set de test. Después de ajustar el modelo con imágenes aumentadas, el accuracy incrementa a 79.20%. Por último, al añadir el modelo pre-entrenado, el accuracy incrementa a 95.40%
-
-#### Referencia del artículo
-
-Tammina S., "Transfer learning using VGG-16 with Deep Convolutional Nerual Network for Classifying Images", International Journal of Scientific and Research Publications, Vol. 9, Issue 10, 2019
-
-<a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">Link del artículo 2</a>
+El primer modelo construido genera un accuracy de 72.40% para el set de test. Después de ajustar el modelo con imágenes aumentadas, el accuracy incrementa a 79.20%. Por último, al añadir el modelo pre-entrenado, el accuracy incrementa a 95.40% [2]
 
 ## Implementación del modelo
-Para la implementación del modelo, se utilizó la arquitectura descrita en el artículo 1 de la sección del estado del arte del modelo.
+Para la implementación del modelo, se utilizó la arquitectura descrita en [1].
 
-```
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow.keras.constraints import max_norm
-from tensorflow.keras.models import Sequential
+![Resumen de arquitectura]()
 
-img_shape = (150, 150, 3)
-
-model = Sequential()
-model.add(
-    Conv2D(32, (3, 3), activation='relu', kernel_constraint=max_norm(3), input_shape=img_shape)
-)
-model.add(MaxPooling2D((2, 2)))
-model.add(
-    Conv2D(64, (3, 3), activation='relu', kernel_constraint=max_norm(3))
-)
-model.add(MaxPooling2D((2, 2)))
-model.add(Dropout(0.2))
-model.add(
-    Conv2D(128, (3, 3), activation='relu', kernel_constraint=max_norm(3))
-)
-model.add(MaxPooling2D((2, 2)))
-model.add(Flatten())
-model.add(Dense(512, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(11, activation='softmax'))
-
-# Compilación del modelo
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-```
+Para la compilación del modelo se utilizó la misma configuración especificada en [1].
+- Optimizador: Adam
+- Loss: Binary crossentropy
+- Metricas: Accuracy
 
 Algunas modificaciones que se hicieron a este modelo fueron:
 - La última capa completamente conectada se estableció con 11 unidades para representar las 11 clases que tiene el dataset
-- El tamaño de entrada de las imágenes fue modificado de 32 x 32 a 150 x 150
+- El tamaño de entrada de las imágenes fue modificado de 32 x 32 a 150 x 150, ya que la resolución de 32 x 32 causa ruido en las imágenes de los paisajes
   - Para igualar las dimensiones de las imágenes de las separaciones (train, validation y test), se utilizó el ImageDataGenerator para re-escalar las imágenes a 150 x 150. Del mismo modo, se normalizaron los pixeles para que estén en el rango de [0, 1]
 
-```
-train_image_rescale = ImageDataGenerator(rescale=1./255)
-train_rescale_generator = train_image_rescale.flow_from_directory(
-    train_dir,
-    target_size=(150, 150),
-    batch_size=32,
-    class_mode="categorical"
-)
-
-val_image_rescale = ImageDataGenerator(rescale=1./255)
-val_rescale_generator = val_image_rescale.flow_from_directory(
-    val_dir,
-    target_size=(150, 150),
-    batch_size=32,
-    class_mode="categorical"
-)
-
-test_image_rescale = ImageDataGenerator(rescale=1./255)
-test_rescale_generator=test_image_rescale.flow_from_directory(
-    test_dir,
-    target_size=(150, 150),
-    batch_size=32,
-    class_mode="categorical"
-)
-```
 ### Metodología de entrenamiento del modelo
-Para entrenar el modelo, se va a utilizar una metodología muy similar al descrito en el artículo 2 de la sección del estado del arte.
+Para entrenar el modelo, se va a utilizar una metodología muy similar al descrito en el [2] para encontrar las diferencias entre el modelo con la arquitectura optimizada y un modelo que utiliza transfer learning para la extracción de features de las imágenes.
 
-1. Crear un modelo para la clasificación de imágenes siguiendo el artículo 1
-2. Entrenar el modelo con las imágenes sin las imágenes aumentadas 
-3. Evaluar el modelo con la separación de datos de validación
+1. Crear un modelo para la clasificación de imágenes siguiendo [1]
+2. Entrenar el modelo con las imágenes no aumentadas 
+3. Evaluar el modelo con la separación de datos de validación y test
 4. Entrenar el modelo con las imágenes aumentadas
-5. Evaluar el modelo con la separación de datos de validación
+5. Evaluar el modelo con la separación de datos de validación y test
 6. Entrenar un modelo nuevo utilizando transfer learning y las imágenes aumentadas
-7. Evaluar el modelo con la separación de datos de validación
-8. Probar ambos modelos finales con la separación de datos de test.
+7. Evaluar el modelo con la separación de datos de validación y test
 
-Con base en la metodolgía del artículo 2, se designaron los siguientes epochs por cada fase del modelo:
+Con base en la metodolgía de [2], se designaron los siguientes epochs por cada fase del modelo:
 - Fase 1: Modelo de clasificación de imágenes entrenado sin imágenes aumentadas
   - Número de epochs: 30
     - El comportamiento observado en el artículo es que en menos de 30 epochs llega al overfitting
@@ -341,7 +206,37 @@ Los resultados de las métricas de accuracy y loss con el modelo entrenado sin l
 
 El modelo memorizó los patrones de la separación de train, ocasionando que al evaluar el modelo con la separación de validation no obtenga clasificaciones correctas. Por ello se concluye que para esta fase el modelo tiene overfitting. Esto se observa en las gráficas cuando los valores de train son mejores que los valores de validation.
 
-Este comportamiento era esperado, de acuerdo con los resultados y la metodología descrita en el artículo 2 de la sección del estado del arte
+Este comportamiento era esperado, de acuerdo con los resultados y la metodología descrita en [2].
+
+Al probarlo contra la separación de los datos de test los resultados fueron los siguientes:
+
+| Set | Accuracy | Loss |
+|-|-|-|
+| Train | 0.9923 | 0.0115 |
+| Validation | 0.7180 | 0.2997 |
+| Test | 0.7202 | 0.2969 |
+
+Como se observa en la tabla, es posible confirmar el overfitting al comparar las métricas de accuracy y loss entre la separación de datos de train y test. Las métricas de la separación de train son mucho mejores que las obtenidas en test con una diferencia del 27% en accuracy y 0.2854 en loss.
+
+Con respecto a las métricas para saber qué tan bien clasificó las imágenes de test, se presentan a continuación la matriz de confusión y las métricas de precision, recall y f1-score.
+
+![Modelo_fase1_matriz_confusion]()
+
+| class | precision | recall | f1-score |
+|-|-|-|-|
+| dew | 0.93 | 0.79 | 0.55
+| fogsmog | 0.77 | 0.88 | 0.83
+| frost | 0.62 | 0.46 | 0.53
+| glaze | 0.62 | 0.58 | 0.60
+| hail | 0.63 | 0.71 | 0.67
+| lightning | 0.82 | 0.92 | 0.87
+| rain | 0.66 | 0.58 | 0.62
+| rainbow | 0.85 | 0.62 | 0.72
+| rime | 0.76 | 0.78 | 0.77
+| sandstorm | 0.88 | 0.82 | 0.85
+| snow | 0.46 | 0.59 | 0.52
+
+Con base en estas métricas podemos observar que las clases de snow, dew y frost son difíciles de clasificar para este modelo, ya que tienen un f1-score menor a 0.60.
 
 Para hacer más robusto el modelo, en la fase 2 se entrena al modelo con las imágenes aumentadas. De esta manera, el modelo es forzado a ver modificaciones de las imágenes originales, haciendo que sea más difícil memorizar las imágenes de entrada.
 
@@ -352,33 +247,44 @@ Los resultados de las métricas de accuracy y loss con el modelo entrenado con l
 
 La diferencia entre las métricas de loss y accuracy ya no es tan grande entre la separación de los datos de train y validation. Esto quiere decir que el modelo sí logró aprender algunos patrones que le permiten clasificar a la imagen. Sin embargo, aún existe una diferencia mayor al 6% de las métricas, por lo que aún se puede considerar que se encuentra en overfitting.
 
-Al ser el modelo final de la fase 2 de la metodología, se decidió utilizar éste para probarlo contra la separación de los datos de test. Los resultados fueron los siguientes.
+Al probarlo contra la separación de los datos de test los resultados fueron los siguientes:
 
-| Accuracy | Loss |
-|-|-|
-| 0.753 | 0.13 |
+| Set | Accuracy | Loss |
+|-|-|-|
+| Train | 0.8001 | 0.0960 |
+| Validation | 0.7400 | 0.1361 |
+| Test | 0.7587 | 0.1274 |
 
-Como se puede observar, ambas métricas están muy cercanas a los valores obtenidos en la etapa de entrenamiento del modelo. Esto quiere decir que el modelo sí fue capaz de aprender algunos patrones en lugar de solo memorizar las imágenes.
+Como se puede observar en la tabla, las métricas de accuracy y loss para la separación de test son muy cercanas a los valores obtenidos en la etapa de entrenamiento del modelo. Esto fue gracias a que las imágenes aumentadas provocaron que fuera más difícil memorizar las imágenes haciendo que las métricas de accuracy y loss sean menores durante el entrenamiento. Esto quiere decir que el modelo sí fue capaz de aprender algunos patrones en lugar de memorizar las imágenes.
 
 Para saber qué tan bien aprendió patrones para reconocer y clasificar imágenes nuevas, también se obtuvo la matriz de confusión y las métricas precision, recall y f1-score
-- Es importante mencionar que para obtener estas métricas solo se hizo sobre el batch de 32 imágenes generadas con la separación de test
 
-![Modelo_fase2_matriz_confusion](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_2_confmat.png?raw=true)
+![Modelo_fase2_matriz_confusion]()
 
 | class | precision | recall | f1-score |
 |-|-|-|-|
-| dew | 1.00 | 0.60 | 0.75
-| fogsmog | 1.00 | 0.67 | 0.80
-| frost | 0.00 | 0.00 | 0.00
-| glaze | 0.50 | 0.75 | 0.60
-| hail | 1.00 | 0.67 | 0.80
-| lightning | 0.50 | 1.00 | 0.67
-| rain | 0.62 | 1.00 | 0.77
-| rainbow | 1.00 | 1.00 | 1.00
-| rime | 0.75 | 0.75 | 0.75
-| sandstorm | 0.50 | 0.50 | 0.50
-| snow | 0.00 | 0.00 | 0.00
+| dew | 0.81 | 0.91 | 0.86
+| fogsmog | 0.81 | 0.91 | 0.86
+| frost | 0.57 | 0.57 | 0.57
+| glaze | 0.65 | 0.59 | 0.62
+| hail | 0.87 | 0.60 | 0.71
+| lightning | 0.77 | 0.88 | 0.82
+| rain | 0.69 | 0.80 | 0.74
+| rainbow | 0.91 | 0.62 | 0.73
+| rime | 0.82 | 0.82 | 0.82
+| sandstorm | 0.94 | 0.78 | 0.85
+| snow | 0.56 | 0.65 | 0.60
 
-Como se puede observar, el modelo es capaz de detectar con un porcentaje decente si una imagen pertenece a una clase de manera correcta.
-- Aquellos valores que aparecen en 0, puede ser debido a que la obtención de la métrica se realizó sobre un batch de 32 imágenes. Esto podría cambiar si se realiza este cálculo sobre toda la separación de test
+Como se puede observar, el modelo es capaz de detectar si una imagen pertenece a una clase de manera correcta con un mayor porcentaje a comparación del modelo de la fase 1. En este caso, la clase que puede ser difícil de clasificar de manera correcta es frost, ya que el valor de f1-score es menor a 0.60.
 
+Para ver qué tan optimizado está la arquitectura propuesta por [1], ahora se implementará un modelo utilizando transfer learning con las mismas características planteadas por [2] en la tercera etapa de su metodología.
+
+#### Fase 3
+
+
+
+## Referencias
+
+[1] Aamir M. et al, "An Optimized Architecture of Image Classification Using Convolutional Neural Network", Modern Education and Computer Science PRESS, 2019 <a href="https://www.mecs-press.org/ijigsp/ijigsp-v11-n10/IJIGSP-V11-N10-5.pdf">MECSS</a>
+
+[2] Tammina S., "Transfer learning using VGG-16 with Deep Convolutional Nerual Network for Classifying Images", International Journal of Scientific and Research Publications, Vol. 9, Issue 10, 2019 <a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">International Journal of Scientific and Research</a>
