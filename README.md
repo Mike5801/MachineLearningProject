@@ -164,7 +164,7 @@ El primer modelo construido genera un accuracy de 72.40% para el set de test. De
 ## Implementación del modelo
 Para la implementación del modelo, se utilizó la arquitectura descrita en [1].
 
-![Resumen de arquitectura]()
+![Resumen de arquitectura](https://github.com/Mike5801/MachineLearningProject/blob/main/images/my_model_summary.png?raw=true)
 
 Para la compilación del modelo se utilizó la misma configuración especificada en [1].
 - Optimizador: Adam
@@ -220,7 +220,7 @@ Como se observa en la tabla, es posible confirmar el overfitting al comparar las
 
 Con respecto a las métricas para saber qué tan bien clasificó las imágenes de test, se presentan a continuación la matriz de confusión y las métricas de precision, recall y f1-score.
 
-![Modelo_fase1_matriz_confusion]()
+![Modelo_fase1_matriz_confusion](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_1_confmat.png?raw=true)
 
 | class | precision | recall | f1-score |
 |-|-|-|-|
@@ -259,7 +259,7 @@ Como se puede observar en la tabla, las métricas de accuracy y loss para la sep
 
 Para saber qué tan bien aprendió patrones para reconocer y clasificar imágenes nuevas, también se obtuvo la matriz de confusión y las métricas precision, recall y f1-score
 
-![Modelo_fase2_matriz_confusion]()
+![Modelo_fase2_matriz_confusion](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_2_confmat.png?raw=true)
 
 | class | precision | recall | f1-score |
 |-|-|-|-|
