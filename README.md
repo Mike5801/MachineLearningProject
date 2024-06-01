@@ -115,7 +115,7 @@ Imagen de la arquitectura propuesta:
 
 En la configuración de la CNN para el entrenamiento se utilizó el optimizador Adam con un aprendizaje fijo (fixed-learning) de 0.001 y un batch size de 32 ejemplos. Para la métrica de loss, utilizó el binary cross-entropy (BCE) también llamado log loss. Por último el dropout rate se estableció a 0.2 para evitar el overfitting de la red. [1]
 
-La arquitectura propuesta en [1] obtuvo el mejor porcentaje de accuracy comparado a los otros métodos. Del mismo modo, dicha arquitectura obtuvo un buen desempeño en las métricas de calidad (precision, recall, f1-score) para la gran mayoría de las clases.
+La arquitectura propuesta en [1] obtuvo el mejor porcentaje de accuracy (78.29%) comparado a los otros métodos utilizados. Del mismo modo, dicha arquitectura obtuvo un buen desempeño en las métricas de calidad (precision, recall, f1-score) para la gran mayoría de las clases.
 
 Transfer learning es un método de re-utilizar un modelo pre-entrenado con conocimiento para otra tarea. Transfer learning puede ser usado para la clasificación, regresión y problemas de agrupación. Para este caso en partícular, el  artículo utilizara el modelo pre-entrenado de VGG-16 para clasificar imágenes. [2]
 
@@ -281,9 +281,9 @@ Para ver qué tan optimizado está la arquitectura propuesta por [1], ahora se i
 
 #### Fase 3
 
-El siguiente modelo que utilza transfer learning está basado en [2].
+El siguiente modelo que utilza transfer learning está basado en [2] el cual utiliza vgg16 con la base de datos de imágenes de ImageNet.
 
-![Modelo_transfer_learning]()
+![Modelo_transfer_learning](https://github.com/Mike5801/MachineLearningProject/blob/main/images/my_model_3_summary.png?raw=true)
 
 Los resultados de las métricas de acc y loss con este modelo fueron los siguientes
 
@@ -331,7 +331,10 @@ A continuación se presentan las métricas de los modelos de las tres fases.
 | Modelo basado en [1] entrenado con imágenes aumentadas | 0.8001 | 0.7587 |
 | Modelo con transfer learning basado en [2] | 0.7240 | 0.7631 |
 
-En conclusión, el mejor modelo para clasificar el dataset propuesto es el modelo con transfer learning. Esto tiene sentido, ya que al utilizar la transferencia de conocimientos de un modelo pre-entrenado para obtener features de las imágenes, facilita la tarea de detectar los patrones necesarios para clasificar imágenes.
+En conclusión, el mejor modelo para clasificar el dataset propuesto, con base en la métrica de accuracy, es el modelo con transfer learning. Esto tiene sentido, ya que al utilizar la transferencia de conocimientos de un modelo pre-entrenado para obtener features de las imágenes, facilita la tarea de detectar los patrones necesarios para clasificar imágenes.
+
+## Fine-tuning del modelo
+El modelo el cual se va a ajustar para buscar una mejora en sus métricas será el obtenido en la fase 2. Esto con el objetivo de superar las métricas obtenidas en la fase 3 con el modelo con transfer learning.
 
 ## Referencias
 
