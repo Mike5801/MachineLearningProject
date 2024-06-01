@@ -281,7 +281,57 @@ Para ver qué tan optimizado está la arquitectura propuesta por [1], ahora se i
 
 #### Fase 3
 
+El siguiente modelo que utilza transfer learning está basado en [2].
 
+![Modelo_transfer_learning]()
+
+Los resultados de las métricas de acc y loss con este modelo fueron los siguientes
+
+![Modelo_fase3_acc&loss](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_3_acc&loss.png?raw=true)
+
+Como se puede observar en las gráficas, las métricas de accuracy y loss para el modelo con transfer learning para la separación de train y validation son muy similares. De esta manera podemos concluir que no existe overfitting en este modelo, ya que la diferencia de accuracy para train y validation es menor al 5%.
+
+Al probar el modelo con la separación de test, obtenemos los siguientes resultados:
+
+| Set | Accuracy | Loss |
+|-|-|-|
+| Train | 0.7240| 0.1259 |
+| Validation | 0.7246 | 0.1194 |
+| Test | 0.7631 | 0.1128 |
+
+El modelo con transfer learning obtuvo un mejor accuracy al probarlo con la separación de test en comparación al accuracy obtenido en train y validation. Esto quiere decir que el modelo si fue capaz de aprender los patrones necesarios para clasificar las imágenes de climas en diferentes paisajes.
+
+Para saber qué tan bien clasifica las imágenes, a continuación se muestra la matriz de confusión y las métricas de precision, recall y f1-score de este modelo.
+
+![Modelo_fase3_matriz_confusion](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_3_confmat.png?raw=true)
+
+| class | precision | recall | f1-score |
+|-|-|-|-|
+| dew | 0.91 | 0.90 | 0.90
+| fogsmog | 0.71 | 0.90 | 0.80
+| frost | 0.72 | 0.55 | 0.62
+| glaze | 0.58 | 0.65 | 0.61
+| hail | 0.95 | 0.74 | 0.83
+| lightning | 0.89 | 0.93 | 0.91
+| rain | 0.74 | 0.84 | 0.78
+| rainbow | 0.92 | 0.74 | 0.82
+| rime | 0.72 | 0.90 | 0.80
+| sandstorm | 0.95 | 0.52 | 0.67
+| snow | 0.66 | 0.58 | 0.62
+
+Con base en la métrica de f1-score, se puede observar que el modelo con transfer learning es capaz de detectar correctamente la gran mayoría de las clases. El valor de esta métrica para cada clase está por encima del 60%. Sin embargo, como se observa en la matriz de confusión, el modelo confunde la clase sandstorm con fogsmog con 45 falsos positivos siendo el número más alto de falsos positivos entre todas las clases.
+
+## Comparación de modelos generados
+
+A continuación se presentan las métricas de los modelos de las tres fases.
+
+| Fase | Train accuracy | Test accuracy |
+| - | - | - |
+| Modelo basado en [1] entrenado sin imágenes aumentadas | 0.9923 | 0.7202 |
+| Modelo basado en [1] entrenado con imágenes aumentadas | 0.8001 | 0.7587 |
+| Modelo con transfer learning basado en [2] | 0.7240 | 0.7631 |
+
+En conclusión, el mejor modelo para clasificar el dataset propuesto es el modelo con transfer learning. Esto tiene sentido, ya que al utilizar la transferencia de conocimientos de un modelo pre-entrenado para obtener features de las imágenes, facilita la tarea de detectar los patrones necesarios para clasificar imágenes.
 
 ## Referencias
 
