@@ -333,7 +333,11 @@ A continuación se presentan las métricas de los modelos de las tres fases.
 
 En conclusión, el mejor modelo para clasificar el dataset propuesto, con base en la métrica de accuracy, es el modelo con transfer learning. Esto tiene sentido, ya que al utilizar la transferencia de conocimientos de un modelo pre-entrenado para obtener features de las imágenes, facilita la tarea de detectar los patrones necesarios para clasificar imágenes.
 
+Link a los modelos generados: <a href="https://drive.google.com/drive/folders/1b1K08LJSGW14UjGg1AJdDK4LDVmhARss?usp=sharing">Modelos</a>
+
 ## Fine-tuning del modelo
+##### El espacio de trabajo para ajustar el modelo está en el archivo A01610836_Project_Finetuning.ipynb
+
 El modelo el cual se va a ajustar para buscar una mejora en sus métricas será el obtenido en la fase 2. Esto con el objetivo de superar las métricas obtenidas en la fase 3 con el modelo con transfer learning.
 
 ## Referencias
