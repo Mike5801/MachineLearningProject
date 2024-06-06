@@ -173,11 +173,11 @@ Para la compilación del modelo se utilizó la misma configuración especificada
 
 Algunas modificaciones que se hicieron a este modelo fueron:
 - La última capa completamente conectada se estableció con 11 unidades para representar las 11 clases que tiene el dataset
-- El tamaño de entrada de las imágenes fue modificado de 32 x 32 a 150 x 150, ya que la resolución de 32 x 32 causa ruido en las imágenes de los paisajes
+- El tamaño de entrada de las imágenes fue modificado de 32 x 32 a 150 x 150, ya que la resolución de 32 x 32 dificulta la visualización de las imágenes de los paisajes
   - Para igualar las dimensiones de las imágenes de las separaciones (train, validation y test), se utilizó el ImageDataGenerator para re-escalar las imágenes a 150 x 150. Del mismo modo, se normalizaron los pixeles para que estén en el rango de [0, 1]
 
 ### Metodología de entrenamiento del modelo
-Para entrenar el modelo, se va a utilizar una metodología muy similar al descrito en el [2] para encontrar las diferencias entre el modelo con la arquitectura optimizada y un modelo que utiliza transfer learning para la extracción de features de las imágenes.
+Para entrenar el modelo, se va a utilizar una metodología muy similar al descrito en [2] para encontrar las diferencias entre el modelo con la arquitectura optimizada y un modelo que utiliza transfer learning para la extracción de features de las imágenes.
 
 1. Crear un modelo para la clasificación de imágenes siguiendo la arquitectura propuesta en [1]
 2. Entrenar el modelo con las imágenes no aumentadas 
@@ -187,7 +187,7 @@ Para entrenar el modelo, se va a utilizar una metodología muy similar al descri
 6. Entrenar un modelo nuevo utilizando transfer learning y las imágenes aumentadas
 7. Evaluar el modelo con la separación de datos de validación y test
 
-Con base en la metodolgía de [2], se designaron los siguientes epochs por cada fase del modelo:
+Con base en la metodolgía de [2], se asignaron los siguientes epochs por cada fase del modelo:
 - Fase 1: Modelo de clasificación de imágenes entrenado sin imágenes aumentadas
   - Número de epochs: 30
     - El comportamiento observado en el artículo es que en menos de 30 epochs llega al overfitting
@@ -204,7 +204,7 @@ Los resultados de las métricas de accuracy y loss con el modelo entrenado sin l
 
 ![Modelo_fase1_acc&loss](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_1_acc&loss.png?raw=true)
 
-El modelo memorizó los patrones de la separación de train, ocasionando que al evaluar el modelo con la separación de validation no obtenga clasificaciones correctas. Por ello se concluye que para esta fase el modelo tiene overfitting. Esto se observa en las gráficas cuando los valores de train son mejores que los valores de validation.
+El modelo memorizó los patrones de la separación de train, ocasionando que al evaluar el modelo con la separación de validation no obtenga clasificaciones correctas. Por ello se concluye que para esta fase el modelo tiene overfitting. Esto se observa en las gráficas cuando los valores de train son mucho mejores que los valores de validation.
 
 Este comportamiento era esperado, de acuerdo con los resultados y la metodología descrita en [2].
 
@@ -216,7 +216,7 @@ Al probarlo contra la separación de los datos de test los resultados fueron los
 | Validation | 0.7180 | 0.2997 |
 | Test | 0.7202 | 0.2969 |
 
-Como se observa en la tabla, es posible confirmar el overfitting al comparar las métricas de accuracy y loss entre la separación de datos de train y test. Las métricas de la separación de train son mucho mejores que las obtenidas en test con una diferencia del 27% en accuracy y 0.2854 en loss.
+Como se observa en la tabla, es posible confirmar el overfitting al comparar las métricas de accuracy y loss entre la separación de datos de train y test. Las métricas de la separación de train son mucho mejores que las obtenidas en test con una diferencia del 27% en accuracy.
 
 Con respecto a las métricas para saber qué tan bien clasificó las imágenes de test, se presentan a continuación la matriz de confusión y las métricas de precision, recall y f1-score.
 
@@ -245,7 +245,7 @@ Los resultados de las métricas de accuracy y loss con el modelo entrenado con l
 
 ![Modelo_fase2_acc&loss](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_2_acc&loss.png?raw=true)
 
-La diferencia entre las métricas de loss y accuracy ya no es tan grande entre la separación de los datos de train y validation. Esto quiere decir que el modelo sí logró aprender algunos patrones que le permiten clasificar a la imagen. Sin embargo, aún existe una diferencia mayor al 6% de las métricas, por lo que aún se puede considerar que se encuentra en overfitting.
+La diferencia entre las métricas de loss y accuracy ya no es tan grande entre la separación de los datos de train y validation. Esto quiere decir que el modelo sí logró aprender algunos patrones que le permiten clasificar las imágenes. Sin embargo, aún existe una diferencia mayor al 6% de las métricas, por lo que aún se puede considerar que se encuentra en overfitting.
 
 Al probarlo contra la separación de los datos de test los resultados fueron los siguientes:
 
@@ -255,9 +255,9 @@ Al probarlo contra la separación de los datos de test los resultados fueron los
 | Validation | 0.7400 | 0.1361 |
 | Test | 0.7587 | 0.1274 |
 
-Como se puede observar en la tabla, las métricas de accuracy y loss para la separación de test son muy cercanas a los valores obtenidos en la etapa de entrenamiento del modelo. Esto fue gracias a que las imágenes aumentadas provocaron que fuera más difícil memorizar las imágenes haciendo que las métricas de accuracy y loss sean menores durante el entrenamiento. Esto quiere decir que el modelo sí fue capaz de aprender algunos patrones en lugar de memorizar las imágenes.
+Como se puede observar en la tabla, las métricas de accuracy y loss para la separación de test son muy cercanas a los valores obtenidos en la etapa de entrenamiento del modelo. Esto fue gracias a que las imágenes aumentadas provocaron que fuera más difícil memorizar las imágenes haciendo que las métricas de accuracy y loss sean menores durante el entrenamiento. Esto quiere decir que el modelo sí fue capaz de aprender algunos patrones en lugar de memorizar las imágenes. Sin embargo, la diferencia de la métrica de accuracy entre la separación de train y test es de 5%, lo cuál puede indicar un ligero overfitting.
 
-Para saber qué tan bien aprendió patrones para reconocer y clasificar imágenes nuevas, también se obtuvo la matriz de confusión y las métricas precision, recall y f1-score
+Para saber qué tan bien aprendió patrones para reconocer y clasificar imágenes, también se obtuvo la matriz de confusión y las métricas precision, recall y f1-score
 
 ![Modelo_fase2_matriz_confusion](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_2_confmat.png?raw=true)
 
@@ -281,7 +281,7 @@ Para ver qué tan optimizado está la arquitectura propuesta por [1], ahora se i
 
 #### Fase 3
 
-El siguiente modelo que utilza transfer learning está basado en [2] el cual utiliza vgg16 con la base de datos de imágenes de ImageNet.
+El siguiente modelo que utiliza transfer learning está basado en [2] el cual utiliza vgg16 con la base de datos de imágenes de ImageNet.
 
 ![Modelo_transfer_learning](https://github.com/Mike5801/MachineLearningProject/blob/main/images/my_model_3_summary.png?raw=true)
 
@@ -289,7 +289,7 @@ Los resultados de las métricas de acc y loss con este modelo fueron los siguien
 
 ![Modelo_fase3_acc&loss](https://github.com/Mike5801/MachineLearningProject/blob/main/images/dev_model_stage_3_acc&loss.png?raw=true)
 
-Como se puede observar en las gráficas, las métricas de accuracy y loss para el modelo con transfer learning para la separación de train y validation son muy similares. De esta manera podemos concluir que no existe overfitting en este modelo, ya que la diferencia de accuracy para train y validation es menor al 5%.
+Como se puede observar en las gráficas, las métricas de accuracy y loss  para la separación de train y validation son muy similares. De esta manera podemos concluir que no existe overfitting en este modelo, ya que la diferencia de accuracy para train y validation es menor al 5%.
 
 Al probar el modelo con la separación de test, obtenemos los siguientes resultados:
 
@@ -299,7 +299,7 @@ Al probar el modelo con la separación de test, obtenemos los siguientes resulta
 | Validation | 0.7246 | 0.1194 |
 | Test | 0.7631 | 0.1128 |
 
-El modelo con transfer learning obtuvo un mejor accuracy al probarlo con la separación de test en comparación al accuracy obtenido en train y validation. Esto quiere decir que el modelo si fue capaz de aprender los patrones necesarios para clasificar las imágenes de climas en diferentes paisajes.
+El modelo con transfer learning obtuvo un mejor accuracy al probarlo con la separación de test en comparación al accuracy obtenido en train y validation. Esto quiere decir que el modelo sí fue capaz de aprender los patrones necesarios para clasificar las imágenes de climas en diferentes paisajes.
 
 Para saber qué tan bien clasifica las imágenes, a continuación se muestra la matriz de confusión y las métricas de precision, recall y f1-score de este modelo.
 
