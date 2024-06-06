@@ -331,17 +331,14 @@ A continuación se presentan las métricas de los modelos de las tres fases.
 | Modelo basado en [1] entrenado con imágenes aumentadas | 0.8001 | 0.7587 |
 | Modelo con transfer learning basado en [2] | 0.7240 | 0.7631 |
 
-En conclusión, el mejor modelo para clasificar el dataset propuesto, con base en la métrica de accuracy, es el modelo con transfer learning. Esto tiene sentido, ya que al utilizar la transferencia de conocimientos de un modelo pre-entrenado para obtener features de las imágenes, facilita la tarea de detectar los patrones necesarios para clasificar imágenes.
+En conclusión, el mejor modelo para clasificar el dataset propuesto, con base en la métrica de accuracy, es el modelo con transfer learning. Esto tiene sentido, ya que al utilizar la transferencia de conocimientos de un modelo pre-entrenado para obtener features de las imágenes, facilita la tarea de detectar los patrones necesarios para clasificar imágenes. Del mismo modo, es posible observar con las métricas de precision, recall y f1-score que es el mejor modelo de los tres, ya que no tiene ninguna métrica por clase menor al 60%.
 
-Link a los modelos generados: <a href="https://drive.google.com/drive/folders/1b1K08LJSGW14UjGg1AJdDK4LDVmhARss?usp=sharing">Modelos</a>
-
-## Fine-tuning del modelo
-##### El espacio de trabajo para ajustar el modelo está en el archivo A01610836_Project_Finetuning.ipynb
-
-El modelo el cual se va a ajustar para buscar una mejora en sus métricas será el obtenido en la fase 2. Esto con el objetivo de superar las métricas obtenidas en la fase 3 con el modelo con transfer learning.
+Link a los modelos generados: <a href="https://drive.google.com/drive/folders/1-1_efiVi7us7ASdodYDjHceRxyVLxqAa?usp=sharing">Modelos</a>
 
 ## Referencias
 
 [1] Aamir M. et al, "An Optimized Architecture of Image Classification Using Convolutional Neural Network", Modern Education and Computer Science PRESS, 2019 <a href="https://www.mecs-press.org/ijigsp/ijigsp-v11-n10/IJIGSP-V11-N10-5.pdf">MECSS</a>
 
 [2] Tammina S., "Transfer learning using VGG-16 with Deep Convolutional Nerual Network for Classifying Images", International Journal of Scientific and Research Publications, Vol. 9, Issue 10, 2019 <a href="https://www.researchgate.net/profile/Srikanth-Tammina/publication/337105858_Transfer_learning_using_VGG-16_with_Deep_Convolutional_Neural_Network_for_Classifying_Images/links/5dc94c3ca6fdcc57503e6ad9/Transfer-learning-using-VGG-16-with-Deep-Convolutional-Neural-Network-for-Classifying-Images.pdf?_sg%5B0%5D=started_experiment_milestone&origin=journalDetail&_rtd=e30%3D">International Journal of Scientific and Research</a>
+
+
